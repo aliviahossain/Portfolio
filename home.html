@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Tech Background */
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .grid-line {
+            position: absolute;
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .grid-line.horizontal {
+            width: 100%;
+            height: 1px;
+            animation: slideRight 20s linear infinite;
+        }
+
+        .grid-line.vertical {
+            width: 1px;
+            height: 100%;
+            animation: slideDown 15s linear infinite;
+        }
+
+        @keyframes slideRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100%); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #64ffda;
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(-50px, 100px); }
+            75% { transform: translate(150px, 50px); }
+        }
+
+        .code-snippet {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: rgba(100, 255, 218, 0.3);
+            animation: fadeCode 8s ease-in-out infinite;
+        }
+
+        @keyframes fadeCode {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 0.3; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #64ffda;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #64ffda;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 8%;
+            position: relative;
+            z-index: 1;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            color: #64ffda;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .name-container {
+            margin-bottom: 1rem;
+        }
+
+        .static-text {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .typing-text {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: #64ffda;
+            line-height: 1.2;
+            border-right: 3px solid #64ffda;
+            padding-right: 5px;
+            animation: blink 0.7s step-end infinite;
+            display: inline-block;
+            min-height: 1.2em;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #8892b0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #64ffda;
+            color: #0a0e27;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #64ffda;
+            border: 2px solid #64ffda;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 0 0 400px;
+            position: relative;
+        }
+
+        .image-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .image-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #64ffda;
+            border-radius: 10px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .image-container:hover .image-border {
+            top: 10px;
+            left: 10px;
+        }
+
+        .profile-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-container:hover .profile-img {
+            transform: translate(-10px, -10px);
+        }
+
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 6rem 5% 2rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .image-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-image {
+                flex: 0 0 300px;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .image-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-image {
+                flex: 0 0 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tech Background -->
+    <div class="tech-background" id="techBg"></div>
+
+    <nav>
+        <div class="logo">&lt;/&gt;</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <p class="greeting">Hi, my name is</p>
+            <div class="name-container">
+                <div class="static-text">Alivia Hossain.</div>
+                <div class="typing-text" id="typingText"></div>
+            </div>
+            <p class="description">
+                I'm an AI engineering student. 
+                Currently focused on creating innovative solutions that make a difference.
+            </p>
+            <div class="cta-buttons">
+                <a href="work.html" class="btn btn-primary">View My Work</a>
+                <a href="contact.html" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <div class="image-container">
+                <div class="image-border"></div>
+                <div class="profile-img">
+                    <!-- Replace the emoji with an actual image by uncommenting below and adding your image URL -->
+                    <img src="ALiviaprofile.jpeg" alt="Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tech Background Animation
+        const techBg = document.getElementById('techBg');
+        
+        // Create grid lines
+        for (let i = 0; i < 8; i++) {
+            const hLine = document.createElement('div');
+            hLine.className = 'grid-line horizontal';
+            hLine.style.top = `${i * 15}%`;
+            hLine.style.animationDelay = `${i * 0.5}s`;
+            techBg.appendChild(hLine);
+
+            const vLine = document.createElement('div');
+            vLine.className = 'grid-line vertical';
+            vLine.style.left = `${i * 12}%`;
+            vLine.style.animationDelay = `${i * 0.3}s`;
+            techBg.appendChild(vLine);
+        }
+
+        // Create floating particles
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            particle.style.animationDuration = `${8 + Math.random() * 10}s`;
+            techBg.appendChild(particle);
+        }
+
+        // Create code snippets
+        const codeSnippets = [
+            'const build = () => {}',
+            'function create()',
+            '<Component />',
+            'import React',
+            'export default',
+            'async await',
+            '{ ...spread }',
+            'npm install'
+        ];
+
+        codeSnippets.forEach((code, i) => {
+            const snippet = document.createElement('div');
+            snippet.className = 'code-snippet';
+            snippet.textContent = code;
+            snippet.style.left = `${10 + (i * 12)}%`;
+            snippet.style.top = `${20 + (i * 10)}%`;
+            snippet.style.animationDelay = `${i * 1}s`;
+            techBg.appendChild(snippet);
+        });
+
+        // Typing Animation
+        const roles = [
+            'I build things for the future.',
+            'I create digital experiences.',
+            'I solve complex problems.'
+        ];
+        
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 100;
+        const deletingSpeed = 50;
+        const pauseTime = 2000;
+
+        function type() {
+            const typingText = document.getElementById('typingText');
+            const currentRole = roles[roleIndex];
+
+            if (isDeleting) {
+                typingText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let timeout = isDeleting ? deletingSpeed : typingSpeed;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                timeout = pauseTime;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+            }
+
+            setTimeout(type, timeout);
+        }
+
+        // Start typing animation
+        setTimeout(type, 1000);
+    </script>
+</body>
+</html>

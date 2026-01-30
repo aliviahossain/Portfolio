@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Alivia Hossain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Tech Background */
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .grid-line {
+            position: absolute;
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .grid-line.horizontal {
+            width: 100%;
+            height: 1px;
+            animation: slideRight 20s linear infinite;
+        }
+
+        .grid-line.vertical {
+            width: 1px;
+            height: 100%;
+            animation: slideDown 15s linear infinite;
+        }
+
+        @keyframes slideRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100%); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #64ffda;
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(-50px, 100px); }
+            75% { transform: translate(150px, 50px); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #64ffda;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #64ffda;
+        }
+
+        .about-section {
+            min-height: 100vh;
+            padding: 120px 8% 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section-number {
+            color: #64ffda;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .content-card {
+            background: rgba(17, 34, 64, 0.4);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .content-card:nth-child(1) { animation-delay: 0.2s; }
+        .content-card:nth-child(2) { animation-delay: 0.3s; }
+        .content-card:nth-child(3) { animation-delay: 0.4s; }
+        .content-card:nth-child(4) { animation-delay: 0.5s; }
+        .content-card:nth-child(5) { animation-delay: 0.6s; }
+
+        .content-card:hover {
+            background: rgba(17, 34, 64, 0.6);
+            border-color: rgba(100, 255, 218, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #64ffda;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .bio-text {
+            color: #8892b0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .bio-text strong {
+            color: #ccd6f6;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* Updated Experience Layout */
+/* Enhanced Experience Layout */
+.experience-content-wrapper {
+    display: flex;
+    gap: 3rem; 
+    align-items: center; /* Keeps text centered relative to the large image */
+}
+
+.experience-image {
+    /* Large scale: 200px */
+    flex: 0 0 200px; 
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(100, 255, 218, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+/* Glossy overlay effect on hover */
+.experience-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.experience-image:hover {
+    transform: translateY(-10px);
+    border-color: #64ffda;
+    box-shadow: 0 10px 30px -10px rgba(100, 255, 218, 0.3);
+}
+
+.experience-image:hover::after {
+    opacity: 1;
+}
+
+/* This will make the image fill the container completely */
+.experience-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Forces the image to fill the 200x200 area */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Optional: Slight zoom on hover to make it feel interactive */
+.experience-image:hover img {
+    transform: scale(1.1);
+}
+
+.experience-image {
+    flex: 0 0 200px; /* Keep the large size we set earlier */
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden; /* This is crucial: it clips the image to your border radius */
+    border: 2px solid rgba(100, 255, 218, 0.3);
+    background: #112240;
+}
+
+        .experience-details {
+            flex: 1;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ccd6f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-org {
+            color: #64ffda;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-desc {
+            color: #8892b0;
+            line-height: 1.6;
+        }
+
+        .award-item {
+            background: rgba(100, 255, 218, 0.05);
+            border-left: 3px solid #64ffda;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .award-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .award-content-wrapper {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .award-image {
+            flex: 0 0 200px;
+            width: 200px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .award-image:hover {
+            transform: scale(1.02);
+            border-color: rgba(100, 255, 218, 0.4);
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.2);
+        }
+
+        .award-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .award-details {
+            flex: 1;
+        }
+
+        .award-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ccd6f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .award-issuer {
+            color: #64ffda;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .award-desc {
+            color: #8892b0;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category-title {
+            color: #64ffda;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .language-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: scale(1.05);
+        }
+
+        .language-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ccd6f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-level {
+            color: #64ffda;
+            font-weight: 500;
+        }
+
+        @media (max-width: 968px) {
+            .about-section {
+                padding: 100px 5% 60px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .experience-content-wrapper,
+            .award-content-wrapper {
+                flex-direction: column;
+            }
+
+            .award-image {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .experience-image {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tech Background -->
+    <div class="tech-background" id="techBg"></div>
+
+    <nav>
+        <div class="logo">&lt;/&gt;</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="about-section">
+        <div class="section-header">
+            <div class="section-number">About Me</div>
+            <h1 class="section-title">Get To Know Me</h1>
+        </div>
+
+        <div class="content-grid">
+            <!-- Bio -->
+            <div class="content-card">
+                <h2 class="card-title">
+                    <span class="card-icon">👋</span>
+                    Hello, I'm Alivia Hossain
+                </h2>
+                <p class="bio-text">
+                    I'm from <strong>Kolkata</strong>, currently residing in <strong>Indore</strong>, and I'm passionate about <strong>Artificial Intelligence and Data Science</strong>. I love solving real-world problems using probability, statistics, and coding. I have explored open-source projects and built a Bayes' Theorem-based survival prediction tool. I'm currently pursuing my <strong>Master of Technology (Integrated) in Artificial Intelligence and Data Science</strong> at Devi Ahilya Vishwavidyalaya, Indore.
+                </p>
+                <br>
+                <p class="bio-text">
+                    I'm eager to grow through research, internships, and collaborative projects, constantly exploring new ways to apply AI and machine learning to solve meaningful challenges.
+                </p>
+            </div>
+
+            <!-- Experience -->
+            <div class="content-card">
+                <h2 class="card-title">
+                    <span class="card-icon">💼</span>
+                    Experience
+                </h2>
+                
+                <div class="experience-item">
+                    <div class="experience-content-wrapper">
+                        <div class="experience-image">
+                            <img src="gdg.jpeg" alt="GDG Logo">
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-title">Web Dev Co-Lead</div>
+                            <div class="experience-org">Google Developer Groups On Campus SDSF DAVV</div>
+                            <p class="experience-desc">
+                                Leading web development initiatives and mentoring students in modern web technologies, fostering a collaborative learning environment within the Google Developer community.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content-wrapper">
+                        <div class="experience-image">
+                            <img src="hacktoberfest-logo.jpg" alt="Hacktoberfest Logo">
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-title">Project Admin and Mentor</div>
+                            <div class="experience-org">Hacktoberfest</div>
+                            <p class="experience-desc">
+                                Administered open-source projects and mentored contributors during Hacktoberfest, guiding developers through their first contributions and fostering open-source collaboration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content-wrapper">
+                        <div class="experience-image">
+                            <img src="girlscript-logo.jpg" alt="GirlScript Logo">
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-title">Open Source Contributor</div>
+                            <div class="experience-org">GirlScript Summer of Code, Social Summer of Code</div>
+                            <p class="experience-desc">
+                                Actively contributed to various open-source projects, collaborating with developers worldwide and enhancing my skills in collaborative software development.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-content-wrapper">
+                        <div class="experience-image">
+                            <img src="gcp.jpg" alt="Google Cloud Logo">
+                        </div>
+                        <div class="experience-details">
+                            <div class="experience-title">Cloud Enthusiast</div>
+                            <div class="experience-org">Google Cloud Skills Boost</div>
+                            <p class="experience-desc">
+                                Earned 19 skill badges and completed multiple labs, demonstrating proficiency in Google Cloud Platform services and cloud computing technologies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards -->
+            <div class="content-card">
+                <h2 class="card-title">
+                    <span class="card-icon">🏆</span>
+                    Awards & Recognition
+                </h2>
+                
+                <div class="award-item">
+                    <div class="award-content-wrapper">
+                        <div class="award-image">
+                            <img src="jbnsts-award.jpg" alt="JBNSTS Award Certificate">
+                        </div>
+                        <div class="award-details">
+                            <div class="award-title">Junior Bigyani Kanya Medha Britti - 2022</div>
+                            <div class="award-issuer">Jagadis Bose National Science Talent Search (JBNSTS)</div>
+                            <p class="award-desc">
+                                Selected as 1 of 52 awardees out of 10,000+ students (Top 0.5%), following a rigorous subjective examination and offline interview conducted by professors from top Indian universities. Honored by the Chief Minister of West Bengal and the Minister of Higher Education of West Bengal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Skills -->
+            <div class="content-card">
+                <h2 class="card-title">
+                    <span class="card-icon">⚡</span>
+                    Technical Skills
+                </h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Programming Languages</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SQL (MySQL)</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C++</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">AI & Machine Learning</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">NLP</span>
+                            <span class="skill-tag">Artificial Intelligence</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Libraries & Frameworks</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">Matplotlib</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Flask</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Web Technologies</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">REST APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Tools & Platforms</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Jupyter Notebook</span>
+                            <span class="skill-tag">Anaconda</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Data Visualization</div>
+                        <div class="skill-list">
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Excel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="content-card">
+                <h2 class="card-title">
+                    <span class="card-icon">🌍</span>
+                    Languages
+                </h2>
+                
+                <div class="languages-grid">
+                    <div class="language-item">
+                        <div class="language-name">Bengali</div>
+                        <div class="language-level">Native/Bilingual Proficiency</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">English</div>
+                        <div class="language-level">Professional Working Proficiency</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Hindi</div>
+                        <div class="language-level">Professional Working Proficiency</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tech Background Animation
+        const techBg = document.getElementById('techBg');
+        
+        // Create grid lines
+        for (let i = 0; i < 8; i++) {
+            const hLine = document.createElement('div');
+            hLine.className = 'grid-line horizontal';
+            hLine.style.top = `${i * 15}%`;
+            hLine.style.animationDelay = `${i * 0.5}s`;
+            techBg.appendChild(hLine);
+
+            const vLine = document.createElement('div');
+            vLine.className = 'grid-line vertical';
+            vLine.style.left = `${i * 12}%`;
+            vLine.style.animationDelay = `${i * 0.3}s`;
+            techBg.appendChild(vLine);
+        }
+
+        // Create floating particles
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            particle.style.animationDuration = `${8 + Math.random() * 10}s`;
+            techBg.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
